@@ -1,0 +1,57 @@
+MariaDB [alan]> select * from nba union select * from worldcup;
++-----------+-----------------------+-----------+------+------------+
+| player_id | player_name           | team      | age  | titles_won |
++-----------+-----------------------+-----------+------+------------+
+|         1 | stephen curry         | warriors  |   34 | 4          |
+|         2 | kawhi leonard         | clippers  |   30 | 2          |
+|         3 | kevin durant          | nets      |   32 | 2          |
+|         4 | kyrie irving          | nets      |   30 | 1          |
+|         5 | russel westbrook      | lakers    |   33 | 0          |
+|         6 | lebron james          | lakers    |   38 | 4          |
+|         7 | luka doncic           | mavericks |   23 | 0          |
+|         8 | giannis antentokounpo | bucks     |   27 | 1          |
+|         1 | cristiano ronaldo     | portugal  |   37 | none       |
+|         2 | luka modric           | croatia   |   37 | none       |
+|         3 | lionel messi          | argentina |   35 | none       |
+|         4 | marco reus            | germany   |   33 | injured    |
+|         5 | paul pogba            | france    |   29 | injured    |
++-----------+-----------------------+-----------+------+------------+
+13 rows in set (0.001 sec)
+
+MariaDB [alan]> select * from faculty where department="computer science" intersect  select * from faculty where faculty_id=4;
++------------+-----------+------------------+---------+--------+
+| faculty_id | name      | department       | dept_id | salary |
++------------+-----------+------------------+---------+--------+
+|          4 | sreekumar | computer science |       1 | 980000 |
++------------+-----------+------------------+---------+--------+
+1 row in set (0.000 sec)
+
+MariaDB [alan]> select * from faculty minus  select * from faculty;
+Empty set (0.001 sec)
+
+MariaDB [alan]> select * from nba;
++-----------+-----------------------+-----------+------+------------+
+| player_id | player_name           | team      | age  | titles_won |
++-----------+-----------------------+-----------+------+------------+
+|         1 | stephen curry         | warriors  |   34 |          4 |
+|         2 | kawhi leonard         | clippers  |   30 |          2 |
+|         3 | kevin durant          | nets      |   32 |          2 |
+|         4 | kyrie irving          | nets      |   30 |          1 |
+|         5 | russel westbrook      | lakers    |   33 |          0 |
+|         6 | lebron james          | lakers    |   38 |          4 |
+|         7 | luka doncic           | mavericks |   23 |          0 |
+|         8 | giannis antentokounpo | bucks     |   27 |          1 |
++-----------+-----------------------+-----------+------+------------+
+8 rows in set (0.000 sec)
+
+MariaDB [alan]> select * from nba where player_id in(select player_id from nba where age>30);
++-----------+------------------+----------+------+------------+
+| player_id | player_name      | team     | age  | titles_won |
++-----------+------------------+----------+------+------------+
+|         1 | stephen curry    | warriors |   34 |          4 |
+|         3 | kevin durant     | nets     |   32 |          2 |
+|         5 | russel westbrook | lakers   |   33 |          0 |
+|         6 | lebron james     | lakers   |   38 |          4 |
++-----------+------------------+----------+------+------------+
+4 rows in set (0.001 sec)
+

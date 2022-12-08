@@ -1,0 +1,70 @@
+MariaDB [alan]> select * from student;
++---------+-------+-------+------------+------+
+| roll_no | name  | class | sport      | mark |
++---------+-------+-------+------------+------+
+|       1 | aaron | 12c   | football   | 81.5 |
+|       4 | aimee | 12c   | tennis     | 64.0 |
+|       9 | alex  | 12d   | volleyball | 94.0 |
+|      11 | anna  | 12d   | athletics  | 91.0 |
+|      17 | jacob | 12a   | basketball | 76.0 |
++---------+-------+-------+------------+------+
+5 rows in set (0.000 sec)
+
+MariaDB [alan]> update student set name="anna" where name="aimee";
+Query OK, 1 row affected (0.040 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [alan]> commit;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [alan]> select * from student;
++---------+---------+-------+------------+------+
+| roll_no | name    | class | sport      | mark |
++---------+---------+-------+------------+------+
+|       1 | aaron   | 12c   | football   | 81.5 |
+|       4 | anna    | 12c   | tennis     | 64.0 |
+|       9 | alex    | 12d   | volleyball | 94.0 |
+|      11 | suzanne | 12d   | athletics  | 91.0 |
+|      17 | jacob   | 12a   | basketball | 76.0 |
++---------+---------+-------+------------+------+
+5 rows in set (0.000 sec)
+
+MariaDB [alan]> start transaction;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [alan]> savepoint insertion;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [alan]> delete from student where roll_no=17;
+Query OK, 1 row affected (0.000 sec)
+
+MariaDB [alan]> select * from student;
++---------+---------+-------+------------+------+
+| roll_no | name    | class | sport      | mark |
++---------+---------+-------+------------+------+
+|       1 | aaron   | 12c   | football   | 81.5 |
+|       4 | anna    | 12c   | tennis     | 64.0 |
+|       9 | alex    | 12d   | volleyball | 94.0 |
+|      11 | suzanne | 12d   | athletics  | 91.0 |
++---------+---------+-------+------------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [alan]> savepoint deletion;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [alan]> rollback to insertion;
+Query OK, 0 rows affected (0.047 sec)
+
+MariaDB [alan]> select * from student;
++---------+---------+-------+------------+------+
+| roll_no | name    | class | sport      | mark |
++---------+---------+-------+------------+------+
+|       1 | aaron   | 12c   | football   | 81.5 |
+|       4 | anna    | 12c   | tennis     | 64.0 |
+|       9 | alex    | 12d   | volleyball | 94.0 |
+|      11 | suzanne | 12d   | athletics  | 91.0 |
+|      17 | jacob   | 12a   | basketball | 76.0 |
++---------+---------+-------+------------+------+
+5 rows in set (0.000 sec)
+
+

@@ -1,0 +1,26 @@
+MariaDB [alan]> create temporary table sport(sportno int, name varchar(15),no_of_students int);
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [alan]> insert into sport values(1,"football",100);Query OK, 1 row affected (0.000 sec)
+
+MariaDB [alan]> insert into sport values(2,"basketball",50);
+Query OK, 1 row affected (0.000 sec)
+
+MariaDB [alan]> insert into sport values(3,"tabletennis",20);
+Query OK, 1 row affected (0.000 sec)
+
+MariaDB [alan]> insert into sport values(4,"volleyball",30);
+Query OK, 1 row affected (0.000 sec)
+
+MariaDB [alan]> select * from sport;
++---------+-------------+----------------+
+| sportno | name        | no_of_students |
++---------+-------------+----------------+
+|       1 | football    |            100 |
+|       2 | basketball  |             50 |
+|       3 | tabletennis |             20 |
+|       4 | volleyball  |             30 |
++---------+-------------+----------------+
+4 rows in set (0.000 sec)
+
+

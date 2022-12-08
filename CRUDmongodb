@@ -1,0 +1,81 @@
+CREATE
+
+db.createCollection("student")
+db.student.insertMany([
+    {
+            "name": "alan",
+            "class": "cs5a",
+            "age": 20,
+            "marks": 90,
+            "sports": "football"
+    },
+    {
+            "name": "ajeed",
+            "class": "cs5a",
+            "age": 20,
+            "marks": 85,
+            "sports": "hockey"
+    }
+]
+)
+
+RETRIEVE
+
+db.student.find()
+
+OUTPUT:
+/* 1 */
+{
+    "_id" : ObjectId("637eec6949e0674eb392a995"),
+    "name" : "alan",
+    "class" : "cs5a",
+    "age" : 20.0,
+    "marks" : 90.0,
+    "sports" : "football"
+}
+
+/* 2 */
+{
+    "_id" : ObjectId("637eec6949e0674eb392a997"),
+    "name" : "ajeed",
+    "class" : "cs5a",
+    "age" : 20.0,
+    "marks" : 85.0,
+    "sports" : "hockey"
+}
+
+UPDATE
+
+db.student.updateOne(
+    {
+        "name":"ajeed"
+    },
+    {
+        $set:{"age":19}
+    }
+)
+
+
+OUTPUT:
+/* 1 */
+{
+    "acknowledged" : true,
+    "matchedCount" : 1.0,
+    "modifiedCount" : 1.0
+}
+
+DELETE
+
+db.student.deleteOne(
+    {
+        "name": "ajeed"
+    }
+)
+
+OUTPUT:
+/* 1 */
+{
+    "acknowledged" : true,
+    "deletedCount" : 1.0
+}
+

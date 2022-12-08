@@ -1,0 +1,220 @@
+MariaDB [alan]> show tables;
++----------------+
+| Tables_in_alan |
++----------------+
+| anime          |
+| apps           |
+| enfuego        |
+| faculty        |
+| nba            |
+| student        |
+| tournament     |
+| worldcup       |
++----------------+
+8 rows in set (0.000 sec)
+
+MariaDB [alan]> select * from student;
++---------+-------+-------+------------+------+
+| roll_no | name  | class | sport      | mark |
++---------+-------+-------+------------+------+
+|       1 | aaron | 12c   | football   | 81.5 |
+|       4 | aimee | 12c   | tennis     | 64.0 |
+|       9 | alex  | 12d   | volleyball | 94.0 |
+|      11 | anna  | 12d   | athletics  | 91.0 |
+|      17 | jacob | 12a   | basketball | 76.0 |
++---------+-------+-------+------------+------+
+5 rows in set (0.000 sec)
+
+MariaDB [alan]> select * from faculty;
++------------+-----------+------------------+---------+---------+
+| faculty_id | name      | department       | dept_id | salary  |
++------------+-----------+------------------+---------+---------+
+|          1 | titty     | computer science |       1 | 1000000 |
+|          2 | pradeep   | electronics      |       2 |   50000 |
+|          3 | sindhu    | mathematics      |       3 |  780000 |
+|          4 | sreekumar | computer science |       1 |  980000 |
+|          5 | sony      | electrical       |       4 |   36000 |
++------------+-----------+------------------+---------+---------+
+5 rows in set (0.000 sec)
+
+MariaDB [alan]> select name from student where faculty_id in(select faculty_id from student where salary>55000);
+ERROR 1054 (42S22): Unknown column 'faculty_id' in 'IN/ALL/ANY subquery'
+MariaDB [alan]> select name from faculty where faculty_id in(select faculty_id from faculty where salary>55000);
++-----------+
+| name      |
++-----------+
+| titty     |
+| sindhu    |
+| sreekumar |
++-----------+
+3 rows in set (0.000 sec)
+
+MariaDB [alan]> select sport,salary from faculty join student on faculty_id=roll_no
+    -> ;
++----------+---------+
+| sport    | salary  |
++----------+---------+
+| football | 1000000 |
+| tennis   |  980000 |
++----------+---------+
+2 rows in set (0.000 sec)
+
+MariaDB [alan]> select sport,salary from faculty natural join student where faculty_id=roll_no;
+Empty set (0.000 sec)
+
+MariaDB [alan]> select sport,salary from faculty inner join student on faculty_id=roll_no;
++----------+---------+
+| sport    | salary  |
++----------+---------+
+| football | 1000000 |
+| tennis   |  980000 |
++----------+---------+
+2 rows in set (0.000 sec)
+
+MariaDB [alan]> select * from faculty inner join student on faculty_id=roll_no;
++------------+-----------+------------------+---------+---------+---------+-------+-------+----------+------+
+| faculty_id | name      | department       | dept_id | salary  | roll_no | name  | class | sport    | mark |
++------------+-----------+------------------+---------+---------+---------+-------+-------+----------+------+
+|          1 | titty     | computer science |       1 | 1000000 |       1 | aaron | 12c   | football | 81.5 |
+|          4 | sreekumar | computer science |       1 |  980000 |       4 | aimee | 12c   | tennis   | 64.0 |
++------------+-----------+------------------+---------+---------+---------+-------+-------+----------+------+
+2 rows in set (0.001 sec)
+
+MariaDB [alan]> select * from faculty outer  join student on faculty_id=roll_no;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'outer  join student on faculty_id=roll_no' at line 1
+MariaDB [alan]> select * from faculty outer join student on faculty_id=roll_no;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'outer join student on faculty_id=roll_no' at line 1
+MariaDB [alan]> select * from faculty cross join student on faculty_id=roll_no;
++------------+-----------+------------------+---------+---------+---------+-------+-------+----------+------+
+| faculty_id | name      | department       | dept_id | salary  | roll_no | name  | class | sport    | mark |
++------------+-----------+------------------+---------+---------+---------+-------+-------+----------+------+
+|          1 | titty     | computer science |       1 | 1000000 |       1 | aaron | 12c   | football | 81.5 |
+|          4 | sreekumar | computer science |       1 |  980000 |       4 | aimee | 12c   | tennis   | 64.0 |
++------------+-----------+------------------+---------+---------+---------+-------+-------+----------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [alan]> show tables;
++----------------+
+| Tables_in_alan |
++----------------+
+| anime          |
+| apps           |
+| enfuego        |
+| faculty        |
+| nba            |
+| student        |
+| tournament     |
+| worldcup       |
++----------------+
+8 rows in set (0.000 sec)
+
+MariaDB [alan]> select * from faculty;
++------------+-----------+------------------+---------+---------+
+| faculty_id | name      | department       | dept_id | salary  |
++------------+-----------+------------------+---------+---------+
+|          1 | titty     | computer science |       1 | 1000000 |
+|          2 | pradeep   | electronics      |       2 |   50000 |
+|          3 | sindhu    | mathematics      |       3 |  780000 |
+|          4 | sreekumar | computer science |       1 |  980000 |
+|          5 | sony      | electrical       |       4 |   36000 |
++------------+-----------+------------------+---------+---------+
+5 rows in set (0.000 sec)
+
+MariaDB [alan]> select * from nba;
++-----------+-----------------------+-----------+------+------------+
+| player_id | player_name           | team      | age  | titles_won |
++-----------+-----------------------+-----------+------+------------+
+|         1 | stephen curry         | warriors  |   34 |          4 |
+|         2 | kawhi leonard         | clippers  |   30 |          2 |
+|         3 | kevin durant          | nets      |   32 |          2 |
+|         4 | kyrie irving          | nets      |   30 |          1 |
+|         5 | russel westbrook      | lakers    |   33 |          0 |
+|         6 | lebron james          | lakers    |   38 |          4 |
+|         7 | luka doncic           | mavericks |   23 |          0 |
+|         8 | giannis antentokounpo | bucks     |   27 |          1 |
++-----------+-----------------------+-----------+------+------------+
+8 rows in set (0.000 sec)
+
+MariaDB [alan]> select * from worldcup;
++-----------+-------------------+-----------+------+---------+
+| player_id | player_name       | country   | age  | injury  |
++-----------+-------------------+-----------+------+---------+
+|         1 | cristiano ronaldo | portugal  |   37 | none    |
+|         2 | luka modric       | croatia   |   37 | none    |
+|         3 | lionel messi      | argentina |   35 | none    |
+|         4 | marco reus        | germany   |   33 | injured |
+|         5 | paul pogba        | france    |   29 | injured |
++-----------+-------------------+-----------+------+---------+
+5 rows in set (0.000 sec)
+
+MariaDB [alan]> select department,country from faculty join worldcup on faculty_id=player_id;
++------------------+-----------+
+| department       | country   |
++------------------+-----------+
+| computer science | portugal  |
+| electronics      | croatia   |
+| mathematics      | argentina |
+| computer science | germany   |
+| electrical       | france    |
++------------------+-----------+
+5 rows in set (0.001 sec)
+
+MariaDB [alan]> select * from faculty cross join worldcup on faculty_id=player_id;
++------------+-----------+------------------+---------+---------+-----------+-------------------+-----------+------+---------+
+| faculty_id | name      | department       | dept_id | salary  | player_id | player_name       | country   | age  | injury  |
++------------+-----------+------------------+---------+---------+-----------+-------------------+-----------+------+---------+
+|          1 | titty     | computer science |       1 | 1000000 |         1 | cristiano ronaldo | portugal  |   37 | none    |
+|          2 | pradeep   | electronics      |       2 |   50000 |         2 | luka modric       | croatia   |   37 | none    |
+|          3 | sindhu    | mathematics      |       3 |  780000 |         3 | lionel messi      | argentina |   35 | none    |
+|          4 | sreekumar | computer science |       1 |  980000 |         4 | marco reus        | germany   |   33 | injured |
+|          5 | sony      | electrical       |       4 |   36000 |         5 | paul pogba        | france    |   29 | injured |
++------------+-----------+------------------+---------+---------+-----------+-------------------+-----------+------+---------+
+5 rows in set (0.000 sec)
+
+MariaDB [alan]> select * from faculty natural join worldcup on faculty_id=player_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'on faculty_id=player_id' at line 1
+MariaDB [alan]> select * from faculty natural join worldcup where faculty_id=player_id;
++------------+-----------+------------------+---------+---------+-----------+-------------------+-----------+------+---------+
+| faculty_id | name      | department       | dept_id | salary  | player_id | player_name       | country   | age  | injury  |
++------------+-----------+------------------+---------+---------+-----------+-------------------+-----------+------+---------+
+|          1 | titty     | computer science |       1 | 1000000 |         1 | cristiano ronaldo | portugal  |   37 | none    |
+|          2 | pradeep   | electronics      |       2 |   50000 |         2 | luka modric       | croatia   |   37 | none    |
+|          3 | sindhu    | mathematics      |       3 |  780000 |         3 | lionel messi      | argentina |   35 | none    |
+|          4 | sreekumar | computer science |       1 |  980000 |         4 | marco reus        | germany   |   33 | injured |
+|          5 | sony      | electrical       |       4 |   36000 |         5 | paul pogba        | france    |   29 | injured |
++------------+-----------+------------------+---------+---------+-----------+-------------------+-----------+------+---------+
+5 rows in set (0.001 sec)
+
+MariaDB [alan]> select * from faculty natural join worldcup;
++------------+-----------+------------------+---------+---------+-----------+-------------------+-----------+------+---------+
+| faculty_id | name      | department       | dept_id | salary  | player_id | player_name       | country   | age  | injury  |
++------------+-----------+------------------+---------+---------+-----------+-------------------+-----------+------+---------+
+|          1 | titty     | computer science |       1 | 1000000 |         1 | cristiano ronaldo | portugal  |   37 | none    |
+|          2 | pradeep   | electronics      |       2 |   50000 |         1 | cristiano ronaldo | portugal  |   37 | none    |
+|          3 | sindhu    | mathematics      |       3 |  780000 |         1 | cristiano ronaldo | portugal  |   37 | none    |
+|          4 | sreekumar | computer science |       1 |  980000 |         1 | cristiano ronaldo | portugal  |   37 | none    |
+|          5 | sony      | electrical       |       4 |   36000 |         1 | cristiano ronaldo | portugal  |   37 | none    |
+|          1 | titty     | computer science |       1 | 1000000 |         2 | luka modric       | croatia   |   37 | none    |
+|          2 | pradeep   | electronics      |       2 |   50000 |         2 | luka modric       | croatia   |   37 | none    |
+|          3 | sindhu    | mathematics      |       3 |  780000 |         2 | luka modric       | croatia   |   37 | none    |
+|          4 | sreekumar | computer science |       1 |  980000 |         2 | luka modric       | croatia   |   37 | none    |
+|          5 | sony      | electrical       |       4 |   36000 |         2 | luka modric       | croatia   |   37 | none    |
+|          1 | titty     | computer science |       1 | 1000000 |         3 | lionel messi      | argentina |   35 | none    |
+|          2 | pradeep   | electronics      |       2 |   50000 |         3 | lionel messi      | argentina |   35 | none    |
+|          3 | sindhu    | mathematics      |       3 |  780000 |         3 | lionel messi      | argentina |   35 | none    |
+|          4 | sreekumar | computer science |       1 |  980000 |         3 | lionel messi      | argentina |   35 | none    |
+|          5 | sony      | electrical       |       4 |   36000 |         3 | lionel messi      | argentina |   35 | none    |
+|          1 | titty     | computer science |       1 | 1000000 |         4 | marco reus        | germany   |   33 | injured |
+|          2 | pradeep   | electronics      |       2 |   50000 |         4 | marco reus        | germany   |   33 | injured |
+|          3 | sindhu    | mathematics      |       3 |  780000 |         4 | marco reus        | germany   |   33 | injured |
+|          4 | sreekumar | computer science |       1 |  980000 |         4 | marco reus        | germany   |   33 | injured |
+|          5 | sony      | electrical       |       4 |   36000 |         4 | marco reus        | germany   |   33 | injured |
+|          1 | titty     | computer science |       1 | 1000000 |         5 | paul pogba        | france    |   29 | injured |
+|          2 | pradeep   | electronics      |       2 |   50000 |         5 | paul pogba        | france    |   29 | injured |
+|          3 | sindhu    | mathematics      |       3 |  780000 |         5 | paul pogba        | france    |   29 | injured |
+|          4 | sreekumar | computer science |       1 |  980000 |         5 | paul pogba        | france    |   29 | injured |
+|          5 | sony      | electrical       |       4 |   36000 |         5 | paul pogba        | france    |   29 | injured |
++------------+-----------+------------------+---------+---------+-----------+-------------------+-----------+------+---------+
+25 rows in set (0.000 sec)
+
+
