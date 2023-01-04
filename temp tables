@@ -1,7 +1,8 @@
 MariaDB [alan]> create temporary table sport(sportno int, name varchar(15),no_of_students int);
 Query OK, 0 rows affected (0.001 sec)
 
-MariaDB [alan]> insert into sport values(1,"football",100);Query OK, 1 row affected (0.000 sec)
+MariaDB [alan]> insert into sport values(1,"football",100);
+Query OK, 1 row affected (0.000 sec)
 
 MariaDB [alan]> insert into sport values(2,"basketball",50);
 Query OK, 1 row affected (0.000 sec)
