@@ -174,18 +174,7 @@ MariaDB [alan]> select * from anime;
 +-----------+-------------+-----------------+----------+--------+
 5 rows in set (0.000 sec)
 
-MariaDB [alan]> create table suii(id int, name varchar);
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1
-MariaDB [alan]> create table suii(id int,name varchar);
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1
-MariaDB [alan]> create table suii(id int,name varchar(20);
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
-MariaDB [alan]> create table suii(id int(5),name varchar(20);
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
-MariaDB [alan]> create table suii(id int,name varchar(20);
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
-MariaDB [alan]> create table suii( id int,name varchar(20);
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+
 MariaDB [alan]> create table hello(id int);
 Query OK, 0 rows affected (0.245 sec)
 
@@ -218,29 +207,7 @@ Query OK, 0 rows affected (0.251 sec)
 
 MariaDB [alan]> select * from hello;
 ERROR 1146 (42S02): Table 'alan.hello' doesn't exist
-MariaDB [alan]> SQL> CREATE TABLE CUSTOMERS(
-    ->    ID   INT              NOT NULL,
-    ->    NAME VARCHAR (20)     NOT NULL,
-    ->    AGE  INT              NOT NULL,
-    ->    ADDRESS  CHAR (25) ,
-    ->    SALARY   DECIMAL (18, 2),       
-    ->    PRIMARY KEY (ID)
-    -> );SQL> CREATE TABLE CUSTOMERS(
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'SQL> CREATE TABLE CUSTOMERS(
-   ID   INT              NOT NULL,
-   NAME VARCH...' at line 1
-    ->    ID   INT              NOT NULL,
-    ->    NAME VARCHAR (20)     NOT NULL,
-    ->    AGE  INT              NOT NULL,
-    ->    ADDRESS  CHAR (25) ,
-    ->    SALARY   DECIMAL (18, 2),       
-    ->    PRIMARY KEY (ID)
-    -> ;     
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'SQL> CREATE TABLE CUSTOMERS(
-   ID   INT              NOT NULL,
-   NAME VARCH...' at line 1
-MariaDB [alan]> show atbles;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'atbles' at line 1
+t line 1
 MariaDB [alan]> show tables;
 +----------------+
 | Tables_in_alan |
@@ -268,8 +235,6 @@ MariaDB [alan]> select * from enfuego;
 +-----------+---------+--------+-------+---------+-------+
 5 rows in set (0.000 sec)
 
-MariaDB [alan]> count(*);
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'count(*)' at line 1
 MariaDB [alan]> select count(*) from enfuego;
 +----------+
 | count(*) |
@@ -334,8 +299,6 @@ MariaDB [alan]> select branch,count(*) from enfuego group by branch;
 +--------+----------+
 3 rows in set (0.000 sec)
 
-MariaDB [alan]> select branch,count(*) from enfuego group by branch having goals<4;
-ERROR 1054 (42S22): Unknown column 'goals' in 'having clause'
 MariaDB [alan]> select branch,count(*) from enfuego group by branch having count(*)<2;
 +--------+----------+
 | branch | count(*) |
@@ -426,13 +389,6 @@ MariaDB [alan]> select branch,max(goals) from enfuego where goals>2 group by bra
 +--------+------------+
 1 row in set (0.000 sec)
 
-MariaDB [alan]> select sum(goals) from enfuego order by goals;
-+------------+
-| sum(goals) |
-+------------+
-|          9 |
-+------------+
-1 row in set (0.000 sec)
 
 MariaDB [alan]> select branch,sum(goals) from enfuego order by goals;
 +--------+------------+
@@ -441,9 +397,7 @@ MariaDB [alan]> select branch,sum(goals) from enfuego order by goals;
 | mech   |          9 |
 +--------+------------+
 1 row in set (0.000 sec)
-
-MariaDB [alan]> select branch,sum(goals) from enfuego order by brnah;
-ERROR 1054 (42S22): Unknown column 'brnah' in 'order clause'
+'
 MariaDB [alan]> select branch,sum(goals) from enfuego order by branch;
 +--------+------------+
 | branch | sum(goals) |
