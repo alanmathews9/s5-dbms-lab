@@ -1,13 +1,13 @@
 MariaDB [alan]> select * from student;
-+---------+-------+-------+------------+------+
-| roll_no | name  | class | sport      | mark |
-+---------+-------+-------+------------+------+
-|       1 | aaron | 12c   | football   | 81.5 |
-|       4 | aimee | 12c   | tennis     | 64.0 |
-|       9 | alex  | 12d   | volleyball | 94.0 |
-|      11 | anna  | 12d   | athletics  | 91.0 |
-|      17 | jacob | 12a   | basketball | 76.0 |
-+---------+-------+-------+------------+------+
++---------+-------+-------+------------+--------+
+| roll_no | name    | class | sport      | mark |
++---------+-------+-------+------------+--------+
+|       1 | aaron   | 12c   | football   | 81.5 |
+|       4 | aimee   | 12c   | tennis     | 64.0 |
+|       9 | alex    | 12d   | volleyball | 94.0 |
+|      11 | suzanne | 12d   | athletics  | 91.0 |
+|      17 | jacob   | 12a   | basketball | 76.0 |
++---------+-------+-------+------------+--------+
 5 rows in set (0.000 sec)
 
 MariaDB [alan]> update student set name="anna" where name="aimee";
