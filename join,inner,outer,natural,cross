@@ -37,8 +37,7 @@ MariaDB [alan]> select * from faculty;
 +------------+-----------+------------------+---------+---------+
 5 rows in set (0.000 sec)
 
-MariaDB [alan]> select name from student where faculty_id in(select faculty_id from student where salary>55000);
-ERROR 1054 (42S22): Unknown column 'faculty_id' in 'IN/ALL/ANY subquery'
+
 MariaDB [alan]> select name from faculty where faculty_id in(select faculty_id from faculty where salary>55000);
 +-----------+
 | name      |
@@ -80,10 +79,7 @@ MariaDB [alan]> select * from faculty inner join student on faculty_id=roll_no;
 +------------+-----------+------------------+---------+---------+---------+-------+-------+----------+------+
 2 rows in set (0.001 sec)
 
-MariaDB [alan]> select * from faculty outer  join student on faculty_id=roll_no;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'outer  join student on faculty_id=roll_no' at line 1
-MariaDB [alan]> select * from faculty outer join student on faculty_id=roll_no;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'outer join student on faculty_id=roll_no' at line 1
+
 MariaDB [alan]> select * from faculty cross join student on faculty_id=roll_no;
 +------------+-----------+------------------+---------+---------+---------+-------+-------+----------+------+
 | faculty_id | name      | department       | dept_id | salary  | roll_no | name  | class | sport    | mark |
@@ -171,8 +167,7 @@ MariaDB [alan]> select * from faculty cross join worldcup on faculty_id=player_i
 +------------+-----------+------------------+---------+---------+-----------+-------------------+-----------+------+---------+
 5 rows in set (0.000 sec)
 
-MariaDB [alan]> select * from faculty natural join worldcup on faculty_id=player_id;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'on faculty_id=player_id' at line 1
+
 MariaDB [alan]> select * from faculty natural join worldcup where faculty_id=player_id;
 +------------+-----------+------------------+---------+---------+-----------+-------------------+-----------+------+---------+
 | faculty_id | name      | department       | dept_id | salary  | player_id | player_name       | country   | age  | injury  |
