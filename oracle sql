@@ -372,7 +372,7 @@ END cust_sal;
 CALLING:
 
 DECLARE 
-   code customers.id%type := &cc_id; 
+   code customers.id%type := &c_id; 
 BEGIN 
    cust_sal.find_sal(code); 
 END; 
