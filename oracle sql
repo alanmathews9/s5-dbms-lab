@@ -286,7 +286,7 @@ END;
 USER DEFINED EXCEPTION:
 
 DECLARE 
-   c_id customers.id%type := &cc_id; 
+   c_id customers.id%type := &c_id; 
    c_name customerS.Name%type; 
    c_addr customers.address%type;  
    -- user defined exception 
